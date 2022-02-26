@@ -7,4 +7,6 @@ public interface ShortenUrlRepository extends MongoRepository<ShortenUrl, String
     Boolean existsByShortenUrl(String shortenUrl);
 
     Boolean existsByUrl(String url);
+
+    ShortenUrl findFirstByShortenUrl(String shortenUrl);
 }
