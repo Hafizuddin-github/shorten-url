@@ -20,10 +20,10 @@ public class ShortenUrlServiceImpl implements ShortenUrlService {
     private final ShortenUrlRepository shortenUrlRepository;
 
     @Override
-    public void addShortenUrl(String url) {
-        Boolean isUrlShorten = shortenUrlRepository.existsByUrl(url);
+    public ShortenUrlResponse addShortenUrl(String url) {
+        ShortenUrl oldShortenUrl = shortenUrlRepository.findFirstByUrl(url);
 
-        if(!isUrlShorten) {
+        if(Objects.isNull(oldShortenUrl)) {
             String shortenUrl = UUID.randomUUID().toString().substring(0,6);
             while(shortenUrlRepository.existsByShortenUrl(shortenUrl)) {
                 shortenUrl = UUID.randomUUID().toString().substring(0,6);
@@ -34,7 +34,10 @@ public class ShortenUrlServiceImpl implements ShortenUrlService {
                     .creationDate(System.currentTimeMillis())
                     .build();
             shortenUrlRepository.save(newShortenUrl);
+            return ShortenUrlResponse.builder().url(url).shortenUrl(shortenUrl).build();
         }
+        return ShortenUrlResponse.builder().url(url).shortenUrl(oldShortenUrl.getShortenUrl()).build();
+
     }
 
     @Override
