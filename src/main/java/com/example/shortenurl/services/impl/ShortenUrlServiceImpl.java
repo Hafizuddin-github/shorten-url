@@ -33,6 +33,7 @@ public class ShortenUrlServiceImpl implements ShortenUrlService {
                     .shortenUrl(shortenUrl)
                     .creationDate(System.currentTimeMillis())
                     .build();
+
             shortenUrlRepository.save(newShortenUrl);
         }
     }
