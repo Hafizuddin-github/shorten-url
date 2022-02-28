@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     static {
         routes = new String[]{
-                "/hc"
+                "/hc", "/v1/url"
         };
     }
 
