@@ -37,7 +37,7 @@ public class ShortenUrlServiceImpl implements ShortenUrlService {
                 shortenUrl = UUID.randomUUID().toString().substring(0,6);
             }
 
-            if(!url.startsWith("http://") || !url.startsWith("https://")) {
+            if(!url.startsWith("http://") && !url.startsWith("https://")) {
                 tempUrl = "http://" + url;
             }
 
@@ -64,7 +64,7 @@ public class ShortenUrlServiceImpl implements ShortenUrlService {
         ShortenUrl shortenUrlObject = shortenUrlRepository.findFirstByShortenUrl(shortenUrl);
         if(Objects.nonNull(shortenUrlObject)) {
             String url = shortenUrlObject.getUrl();
-            if(!url.startsWith("http://") || !url.startsWith("https://")) {
+            if(!url.startsWith("http://") && !url.startsWith("https://")) {
                 url = "http://" + url;
             }
             return ShortenUrlResponse.builder().shortenUrl(shortenUrl).url(url).build();
