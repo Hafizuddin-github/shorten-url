@@ -23,7 +23,7 @@ public class UrlController {
     private final ShortenUrlService shortenUrlService;
 
     @PostMapping("")
-    public ShortenUrlResponse addNewUrl(@RequestBody ShortenUrlRequest request) {
+    public ShortenUrlResponse addNewUrl(@RequestBody ShortenUrlRequest request) throws Exception {
         return shortenUrlService.addShortenUrl(request.getUrl());
     }
 
